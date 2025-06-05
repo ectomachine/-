@@ -1,169 +1,110 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>artemii</title>
-    <style>
-        @keyframes fundoAlternando {
-            0%, 100% { background-color: #ffffff; }
-            50%      { background-color: #000000; }
-        }
 
+<head>
+    <meta charset="UTF-8" />
+    <title>Vitor & Leo - Borboletas</title>
+    <style>
         body {
-            animation: fundoAlternando 4s infinite;
+            font-family: "Segoe UI", sans-serif;
+            background: #fefefe;
+            color: #222;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            position: relative;
+            padding: 50px;
         }
 
-        h1 {
-            font-size: 3em;
-            color: #ff69b4;
+        #mensagem {
+            font-size: 1.5em;
+            background: #797979;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            min-height: 100px;
+            max-width: 600px;
+            text-align: center;
+            white-space: pre-line;
+        }
+
+        #titulo {
+            font-size: 2em;
+            color: rgb(3, 3, 3);
             margin-bottom: 20px;
-            z-index: 2;
-            text-shadow: 0 0 10px #ff69b4;
         }
-
-        img {
-            width: 300px;
-            height: auto;
-            z-index: 2;
-        }
-
-        .audio {
-            width: 0;
-            height: 0;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .heart {
-            position: absolute;
-            color: #ff69b4;
-            font-size: 24px;
-            animation: float 6s infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(1);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        .heart:nth-child(1) { left: 5%;  animation-delay: 0s; }
-        .heart:nth-child(2) { left: 15%; animation-delay: 1s; }
-        .heart:nth-child(3) { left: 25%; animation-delay: 2s; }
-        .heart:nth-child(4) { left: 35%; animation-delay: 3s; }
-        .heart:nth-child(5) { left: 50%; animation-delay: 1.5s; }
-        .heart:nth-child(6) { left: 65%; animation-delay: 0.5s; }
-        .heart:nth-child(7) { left: 75%; animation-delay: 2.5s; }
-        .heart:nth-child(8) { left: 85%; animation-delay: 3.5s; }
-        .heart:nth-child(9) { left: 95%; animation-delay: 4.5s; }
-
-        /* Texto misterioso mais sutil */
-        .hidden-text {
-            font-size: 1.2em;
-            color: #ff69b4;
-            margin-top: 30px;
-            opacity: 1; /* Certifica-se de que o texto está visível */
-            font-weight: 300;
-            letter-spacing: 2px;
-            font-style: italic;
-            z-index: 2;
-            animation: aparecerTexto 4s infinite;
-        }
-
-        @keyframes aparecerTexto {
-            0%, 25%, 75%, 100% {
-                opacity: 0;
-            }
-            45%, 55% {
-                opacity: 1;
-            }
-        }
-
-        /* Botão para tocar música */
-        #playButton {
-            padding: 15px 30px;
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 8px;
-            margin-top: 20px;
-            z-index: 2;
-        }
-
-        #playButton:hover {
-            background-color: #ff3385;
-        }
-
     </style>
 </head>
+
 <body>
-    <h1>artemii</h1>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Gatinho pulando">
 
-    <!-- Texto misterioso -->
-    <div class="hidden-text">Я тоже тебя ненавижу</div>
-
-    <!-- Corações flutuando -->
-    <div class="hearts">
-        <div class="heart">💖</div>
-        <div class="heart">💗</div>
-        <div class="heart">💓</div>
-        <div class="heart">💕</div>
-        <div class="heart">💘</div>
-        <div class="heart">💝</div>
-        <div class="heart">❤️</div>
-        <div class="heart">💞</div>
-        <div class="heart">🩷</div>
-    </div>
-
-    <!-- Botão para tocar a música -->
-    <button id="playButton">чертов русский</button>
-
-    <!-- Música do YouTube -->
-    <iframe id="musicIframe" class="audio" 
-        src="https://www.youtube.com/embed/60JWzOfj0DU?autoplay=1&mute=0&loop=1&playlist=60JWzOfj0DU" 
-        frameborder="0" 
-        allow="autoplay" style="display: none;">
-    </iframe>
+    <div id="titulo">💜 Vitor & Leo 💜</div>
+    <div id="mensagem">Iniciando...</div>
+    <audio id="audio" src="borboletas.wav"></audio>
 
     <script>
-        // Função para iniciar o áudio ao clicar no botão
-        document.getElementById("playButton").addEventListener("click", function() {
-            const iframe = document.getElementById("musicIframe");
-            iframe.style.display = "block"; // Torna o iframe visível
-            iframe.src = iframe.src; // Reinicia o iframe para garantir que a música toque
-            this.style.display = "none"; // Esconde o botão após clicar
+        const mensagemBox = document.getElementById("mensagem");
+        const audio = document.getElementById("audio");
+
+        const pausas = [
+            ["Não sei dizer o que mudou", 3000],
+            ["Mas nada está igual", 4000],
+            ["♪ Numa noite estranha a gente se estranha e fica mal ♪", 7100],
+            ["Você", 1100],
+            ["Tenta provar", 2000],
+            ["Que tudo em nós morreu!", 3100],
+            ["♪ Borboletas sempre voltam e o seu jardim sou eu ♪", 7000],
+            ...Array(25).fill(["♫ ♪ ♫ ♪ ♫", 1000]),
+            ...Array(2).fill(["♪", 1300]),
+            ["♪♫♪", 1100],
+            ...Array(4).fill(["♫", 250]),
+            ...Array(5).fill(["♪", 400]),
+            [".", 300],
+            ...Array(4).fill(["♫", 250]),
+            ...Array(5).fill(["♪", 400]),
+            ["Percebo que o tempo já não passa", 3000],
+            ["Você diz que não tem graça...", 2400],
+            ["Amar assim", 2000],
+            ["Foi tudo tão bonito, mas voou pro infinito", 4000],
+            ["Parecido...", 1000],
+            ["Com borboletas num jardim", 2000],
+            ["♫♪♫♪", 1000],
+            ["Agora você volta...", 1500],
+            ["E balança o que eu sentia por outro alguém!", 4000],
+            ["♫♪♫♪", 1000],
+            ["Dividido entre dois mundos", 1500],
+            ["Sei que estou amando mas ainda não sei quem!", 3500]
+        ];
+
+        // mensagens no time
+        function mostrarMensagens(repeticoes = 2) {
+            let tempo = 0;
+            for (let r = 0; r < repeticoes; r++) {
+                pausas.forEach(([msg, delay]) => {
+                    setTimeout(() => {
+                        mensagemBox.textContent = msg;
+                    }, tempo);
+                    tempo += delay;
+                });
+            }
+
+
+            setTimeout(() => {
+                mensagemBox.textContent = "The end";
+                audio.pause();
+                audio.currentTime = 0;
+            }, tempo);
+        }
+
+
+        audio.play().then(() => {
+            setTimeout(() => {
+                mostrarMensagens();
+            }, 53000);
+        }).catch(() => {
+            mensagemBox.textContent = "Erro no som, fiote";
         });
     </script>
+
 </body>
+
 </html>
